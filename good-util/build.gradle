@@ -13,6 +13,9 @@ dependencies {
 	// Guava's spikier cousin (helps with exceptions in streams)
 //	implementation 'com.diffplug.durian:durian:3.4.0'
 
+	// Multimaps and graphs
+	implementation 'com.google.guava:guava:28.0-jre'
+
 
 	// Testing framework
 	testImplementation 'org.testng:testng:6.14.3'

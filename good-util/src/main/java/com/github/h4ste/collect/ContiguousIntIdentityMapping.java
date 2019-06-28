@@ -1,4 +1,4 @@
-package com.github.h4ste.good.util;
+package com.github.h4ste.collect;
 
 import it.unimi.dsi.fastutil.objects.Object2IntAVLTreeMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;

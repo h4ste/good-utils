@@ -1,4 +1,4 @@
-package com.github.h4ste.good.util;
+package com.github.h4ste.collect;
 
 public interface IntIdentifier<K> extends IntIdentityMapping<K> {
   /**

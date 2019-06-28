@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+group 'com.github.h4ste'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Wrapper to implement UMLS RESTful API client
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+
+    // Adapter to allow retrofit to provide results as reactive streams
+    implementation 'com.jakewharton.retrofit:retrofit2-reactor-adapter:2.1.0'
+
+    // https://mvnrepository.com/artifact/io.projectreactor/reactor-core
+    api 'io.projectreactor:reactor-core:3.1.8.RELEASE'
+
+    testImplementation 'junit:junit:4.12'
+}

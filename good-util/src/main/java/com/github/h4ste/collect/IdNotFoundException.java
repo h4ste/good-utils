@@ -1,4 +1,4 @@
-package com.github.h4ste.good.util;
+package com.github.h4ste.collect;
 
 public class IdNotFoundException  extends RuntimeException {
   private static final long serialVersionUID = 1L;

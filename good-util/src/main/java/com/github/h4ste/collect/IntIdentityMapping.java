@@ -1,4 +1,4 @@
-package com.github.h4ste.good.util;
+package com.github.h4ste.collect;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
