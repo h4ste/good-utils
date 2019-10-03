@@ -2,6 +2,7 @@ package com.github.h4ste.logging;
 
 import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 @SuppressWarnings("unused")
 public final class ProgressLogger implements AutoCloseable {
 
-  private final long startTime;
+  private long startTime;
   private final String description;
   private final long updateInterval;
   private final Logger log;
@@ -18,6 +19,8 @@ public final class ProgressLogger implements AutoCloseable {
   private long max;
   private long last = 0L;
   private long lastPrint = 0L;
+
+  private final AtomicBoolean started = new AtomicBoolean(false);
 
   private ProgressLogger(String description, long max, long updateInterval, TimeUnit updateUnit) {
     this.updateInterval = updateUnit.toMillis(updateInterval);
@@ -30,6 +33,16 @@ public final class ProgressLogger implements AutoCloseable {
     } else {
       log = LogManager.getLogger(clazz);
     }
+  }
+
+  @SuppressWarnings("UnusedReturnValue")
+  public ProgressLogger maybeStart() {
+    // compareAndSet is an atomic operation, so this ensures that the startTime will only be
+    // updated the first time maybeStart() is called
+    if (started.compareAndSet(false, true)) {
+      this.startTime = System.currentTimeMillis();
+    }
+    return this;
   }
 
   /**

@@ -5,11 +5,9 @@ import com.typesafe.config.ConfigException;
 import com.typesafe.config.ConfigObject;
 import com.typesafe.config.ConfigValue;
 import com.typesafe.config.ConfigValueType;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -140,7 +138,7 @@ public final class Config {
    *             if value is not convertible to a double
    */
   public float getFloat(String path) {
-    return Float.valueOf(conf.getString(path));
+    return Float.parseFloat(conf.getString(path));
   }
 
   /**
@@ -160,6 +158,7 @@ public final class Config {
     return new File(getString(path));
   }
 
+  @Deprecated
   public File getFileSafe(String path) {
     final File file = new File(getString(path));
     //noinspection ResultOfMethodCallIgnored
@@ -234,9 +233,9 @@ public final class Config {
 
   private <T> Map<String, T> getMap(String path, ConfigValueType type, Function<ConfigValue, T> getter) {
     final ConfigObject subConfObj = conf.getObject(path);
-    return Collections.unmodifiableMap(subConfObj.entrySet().stream()
+    return subConfObj.entrySet().stream()
         .filter(e -> e.getValue().valueType() == type)
-        .collect(Collectors.toMap(Map.Entry::getKey, e -> getter.apply(e.getValue()))));
+        .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, e -> getter.apply(e.getValue())));
   }
 
   public Map<String, Boolean> getBooleanMap(String path) {
