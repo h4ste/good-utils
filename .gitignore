@@ -133,7 +133,7 @@ venv.bak/
 .gradle
 /build/
 
-# Ignore Gradle GUI config
+# Ignore Gradle GUI settings
 gradle-app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
